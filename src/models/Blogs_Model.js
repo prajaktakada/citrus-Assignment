@@ -11,23 +11,27 @@ const BlogsSchema = new mongoose.Schema({
 
     title: {
         type: String,
-        required: true
+        required: 'Blog title is required',
+        trim: true
     },
     body: {
         type: String,
-        required: true
+        required: 'Blog body is required',
+        trim: true
     },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'AuthorsDB',
-        required: true
+        required: 'Blog Author is required'
     },
-    tags: [String],
+    tags: [{type: String, trim: true}],
     category: {
         type: String,
-        required: true
+        required: 'Blog category is required',
+        trim: true 
     },
-    subcategory: [String],
+    // subcategory: [String],
+    subcategory: [{type: String, trim: true}],
     createdAt:
     {
         type: Date,
