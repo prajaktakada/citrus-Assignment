@@ -2,20 +2,24 @@ const express = require('express');
 
 const router = express.Router();
 
-const AuthorController=require("../controllers/authorcontroller")
-const BlogsController=require("../controllers/blogscontroller")
-const Middleware=require("../middleware/Authentication")
+const userController=require("../controllers/UserController")
+const taskController=require("../controllers/taskController")
 
-router.get('/test-me', function (req, res) {
-    res.send('My first ever api!')
-});
-//
-router.post('/createAuthor',AuthorController.createAuthor)
-router.post('/createBlogs',Middleware.Auth,BlogsController.createBlogs)
-router.get('/getBlogs',Middleware.Auth,BlogsController.getBlogs)
-router.put('/update/:blogId',Middleware.Auth,BlogsController.update)
-router.delete('/DeleteBlogs/:deleteId',Middleware.Auth,BlogsController.DeleteBlogs)
-router.delete('/DeleteBlogsbyQuery',Middleware.Auth,BlogsController.DeleteBlogsbyQuery)
-router.post('/loginAuthor',AuthorController.loginAuthor)
+//Authentication
+ const Middleware=require("../middleware/Authentication");
+const { route } = require('express/lib/application');
+
+
+//user Api
+router.post('/user',userController.resisterUser)
+router.post('/login',userController.login)
+
+//task Api
+router.post('/createTask',taskController.createTask)
+router.get('/gettask/:userId',Middleware.Auth,taskController.gettask) 
+router.put('/task/:id',Middleware.Auth,taskController.updateTask)
+router.delete('/task/:id',Middleware.Auth,taskController.DeletebyQuery)
+
 
 module.exports = router;
+
