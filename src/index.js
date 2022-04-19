@@ -21,10 +21,6 @@ app.listen(process.env.PORT || 3000, function() {
 });
 
 
-
-
-
-
 // if (process.env.NODE_ENV) {
 //     require ("dotenv").config({
 //         path:`./.env.${process.env.NODE_ENV}`
