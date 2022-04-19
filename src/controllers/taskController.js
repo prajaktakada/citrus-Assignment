@@ -22,11 +22,11 @@ const createTask = async function (req, res) {
             return res.status(400).send({ status: false, message: 'Invalid request parameters. Please provide intern details' })
         }
 
-        // if (files && files.length > 0) {
-        //     var uploadedFileURL = await upload.uploadFile(files[0]);
-        // } else {
-        //     res.status(400).send({ status: false, message: "nothing to write" })
-        // } 
+        if (files && files.length > 0) {
+            var uploadedFileURL = await upload.uploadFile(files[0]);
+        } else {
+            res.status(400).send({ status: false, message: "nothing to write" })
+        } 
 
         //extract params
         let { title, userId, duedate} = requestBody;
@@ -50,8 +50,8 @@ const createTask = async function (req, res) {
             return res.status(400).send({ status: false, message: 'Invalid request parameters. Please provide valid duedate' })
         }
 
-        //  const taskData = {title,userId,task_attachmen:uploadedFileURL,duedate}
-        const taskData = {title,userId,duedate}
+          const taskData = {title,userId,task_attachmen:uploadedFileURL,duedate}
+        //const taskData = {title,userId,duedate}
 
 
         let savedtask = await taskModel.create(taskData)
@@ -119,11 +119,11 @@ const updateTask = async function (req, res) {
         }
       
 
-        // if (profileImage && profileImage.length > 0) {
-        //     var uploadedFileURL = await upload.uploadFile(profileImage[0]);
-        //     console.log(uploadedFileURL)
-        //     requestbody.profileImage = uploadedFileURL
-        // };
+        if (profileImage && profileImage.length > 0) {
+            var uploadedFileURL = await upload.uploadFile(profileImage[0]);
+            console.log(uploadedFileURL)
+            requestbody.profileImage = uploadedFileURL
+        };
 
 
         //extract params
